@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Updating repository
-sudo apt update
+sudo apt-get update && sudo apt-get dist-upgrade
 
 # Installing server
-sudo apt install mysql-server-8.0 -y
+sudo apt-get install mysql-server mysql-client

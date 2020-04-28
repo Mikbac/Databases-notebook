@@ -1,0 +1,1 @@
+#!/bin/bash# Show databasessudo mysqlshow# Show tables for database1sudo mysqlshow database1# Show userssudo mysql -e "SELECT User, Host, plugin FROM mysql.user" mysql
