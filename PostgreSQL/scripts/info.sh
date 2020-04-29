@@ -1,0 +1,1 @@
+#!/bin/bash# Cluster listsudo pg_lsclusters# Service statussudo systemctl status postgresql

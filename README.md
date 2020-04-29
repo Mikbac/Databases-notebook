@@ -12,3 +12,6 @@ dos2unix ./MySQL/scripts/*
 ```
 dos2unix ./MSSQL/scripts/*
 ```
+```
+dos2unix ./Postgresql/scripts/*
+```
