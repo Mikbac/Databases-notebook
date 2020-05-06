@@ -19,7 +19,7 @@ CREATE TABLE people
 );
 CREATE TABLE self_isolations
 (
-    personId  INT,
+    personId  INT PRIMARY KEY,
     startDate DATE,
     endDate   DATE
 );
@@ -29,6 +29,11 @@ CREATE TABLE producers
     name    VARCHAR(200) COLLATE Latin1_General_100_CS_AS_SC,
     address VARCHAR(1000) COLLATE Latin1_General_100_CS_AS_SC
 );
+
+INSERT INTO houses (id, owner_surname, address, area, bedrooms)
+VALUES (2, 'Markowitz', '293  Davis Place, Toledo, OH', 156.2, 3),
+       (3, 'Earl', '2071  Rockford Mountain Lane, Appleton, WI', 54.5, 1),
+       (5, 'Hampton', '930  Sunny Glen Lane, Cleveland, OH', 111.9, 2);
 
 -- Information about tables in the current database
 SELECT TABLE_NAME

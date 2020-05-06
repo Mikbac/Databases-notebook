@@ -12,6 +12,10 @@
 ```
 $ sudo service mysql start
 ```
+##### For WSL2
+```
+sudo /etc/init.d/mysql start
+```
 
 ## Close server
 ```

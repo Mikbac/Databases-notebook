@@ -42,5 +42,13 @@ $ sudo systemctl status mssql-server.service
 $ sudo journalctl -u mssql-server.service --all
 ```
 
+## mssql-cli
 
+```
+sudo apt-get update
+wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu60_60.2-3ubuntu3.1_amd64.deb
+sudo dpkg -i libicu60_60.2-3ubuntu3.1_amd64.deb
+sudo apt-get install -y mssql-cli
+mssql-cli -S localhost -U sa
+```
 
