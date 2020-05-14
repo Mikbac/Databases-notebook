@@ -11,7 +11,7 @@ DROP DATABASE test1;
 -- TABLE
 CREATE TABLE tableName1
 (
-    id      INTEGER,
+    id      INTEGER PRIMARY KEY,
     name1   TEXT,
     name2   VARCHAR(30),
     name3   TEXT COLLATE "C",
