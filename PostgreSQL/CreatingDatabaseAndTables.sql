@@ -2,6 +2,7 @@
 
 CREATE DATABASE test1;
 
+CREATE DATABASE test2 OWNER ownerName;
 -- Changing database
 \c test1
 \connect test1

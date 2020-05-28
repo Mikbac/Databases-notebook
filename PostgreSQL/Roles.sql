@@ -37,3 +37,9 @@ REVOKE group_role FROM role1, ... ;
 
 -- Removing membership
 REVOKE exampleRole1 FROM roleToRemove;
+
+-- Connections limit
+ALTER ROLE limited CONNECTION LIMIT 10;
+
+-- Password validity
+ALTER ROLE userName VALID UNTIL '2020-05-31 00:00:00';
