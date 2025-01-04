@@ -30,10 +30,10 @@ ALTER ROLE "exampleRole2" PASSWORD 'pass';
 DROP ROLE exampleRole1;
 
 -- Adding role to role
-GRANT group_role TO role1, ... ;
+GRANT group_role TO role1, ...;
 
 -- Removing role from role
-REVOKE group_role FROM role1, ... ;
+REVOKE group_role FROM role1, ...;
 
 -- Removing membership
 REVOKE exampleRole1 FROM roleToRemove;

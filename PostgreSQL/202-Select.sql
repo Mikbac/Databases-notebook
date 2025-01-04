@@ -33,16 +33,16 @@ WHERE rolname SIMILAR TO 'userName1|userName2';
 -- Mathematical operators
 -- https://www.postgresql.org/docs/current/functions-math.html
 SELECT name, population / area AS population_density
-FROM cities
+FROM cities;
 
 -- ====================
 -- String operators
 -- https://www.postgresql.org/docs/9.1/functions-string.html
 SELECT name || country AS location
-FROM cities
+FROM cities;
 
 SELECT UPPER(CONCAT(name, ', ', country)) AS location
-FROM cities
+FROM cities;
 
 -- ====================
 -- Comparison operators
@@ -62,3 +62,10 @@ WHERE name NOT IN ('Delhi', 'Shanghai');
 SELECT name, population / area AS population_density
 FROM cities
 WHERE population / area > 6000;
+
+-- ====================
+-- Join
+SELECT *
+FROM photos
+         JOIN users ON users.id = photos.user_id
+WHERE users.id = 4;

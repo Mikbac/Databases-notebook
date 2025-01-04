@@ -8,10 +8,14 @@ ALTER SCHEMA schemaName RENAME TO roleName;
 ALTER SCHEMA schemaName OWNER TO roleName;
 
 -- Creating table in schema public
-CREATE TABLE public.tableName(email TEXT);
+CREATE TABLE public.tableName
+(
+    email TEXT
+);
 
 -- Insert to table in schema public
-INSERT INTO public.tableName(email) VALUES ('osoba@adres.tld');
+INSERT INTO public.tableName(email)
+VALUES ('osoba@adres.tld');
 
 -- Revoke permissions
 REVOKE ALL ON SCHEMA public FROM roleName;
