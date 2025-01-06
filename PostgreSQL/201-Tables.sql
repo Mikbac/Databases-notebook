@@ -10,9 +10,10 @@ CREATE TABLE tableName1
 );
 
 INSERT INTO tableName1
-VALUES (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
-       (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
-       (1, 'Diane', 'hamster', 'f', 2, '1999-03-30');
+VALUES
+    (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
+    (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
+    (1, 'Diane', 'hamster', 'f', 2, '1999-03-30');
 
 DROP TABLE tableName1;
 
@@ -29,9 +30,10 @@ CREATE TABLE cities
 );
 
 INSERT INTO cities (name, country, population, area)
-VALUES ('Delhi', 'India', 28125000, 2240),
-       ('Shanghai', 'China', 22125000, 4015),
-       ('Sao Paulo', 'Brazil', 20935000, 3043);
+VALUES
+    ('Delhi', 'India', 28125000, 2240),
+    ('Shanghai', 'China', 22125000, 4015),
+    ('Sao Paulo', 'Brazil', 20935000, 3043);
 
 UPDATE cities
 SET population = 30935000
@@ -52,10 +54,11 @@ CREATE TABLE users
 );
 
 INSERT INTO users (username)
-VALUES ('aaa'),
-       ('bbb'),
-       ('ccc'),
-       ('ddd');
+VALUES
+    ('aaa'),
+    ('bbb'),
+    ('ccc'),
+    ('ddd');
 
 CREATE TABLE photos
 (
@@ -65,8 +68,9 @@ CREATE TABLE photos
 );
 
 INSERT INTO photos (url, user_id)
-VALUES ('http://one.jpg', 4),
-       ('http://two.jpg', (SELECT id FROM users WHERE username = 'ccc'));
+VALUES
+    ('http://one.jpg', 4),
+    ('http://two.jpg', (SELECT id FROM users WHERE username = 'ccc'));
 
 -- or (technically the same)
 CREATE TABLE photos
@@ -78,7 +82,8 @@ CREATE TABLE photos
 );
 
 INSERT INTO photos (url, user_id)
-VALUES ('http://one.jpg', 4);
+VALUES
+    ('http://one.jpg', 4);
 
 -- ====================
 -- Example 4
@@ -95,6 +100,12 @@ CREATE TABLE photos
     url     VARCHAR(200),
     user_id INTEGER REFERENCES users (id) ON DELETE RESTRICT
 );
+-- test:
+DELETE
+FROM users
+WHERE username = 'aaa';
+SELECT *
+FROM photos;
 
 CREATE TABLE photos
 (
@@ -102,6 +113,12 @@ CREATE TABLE photos
     url     VARCHAR(200),
     user_id INTEGER REFERENCES users (id) ON DELETE CASCADE
 );
+-- test:
+DELETE
+FROM users
+WHERE username = 'aaa';
+SELECT *
+FROM photos;
 
 CREATE TABLE photos
 (
@@ -109,12 +126,18 @@ CREATE TABLE photos
     url     VARCHAR(200),
     user_id INTEGER REFERENCES users (id) ON DELETE SET NULL
 );
+-- test:
+DELETE
+FROM users
+WHERE username = 'aaa';
+SELECT *
+FROM photos;
+
 -- ====================
 -- Example 4
 
 -- One-to-Many / Many-to-One
 -- A user has many photos. | Company has many employee.
-
 
 -- One-to-One
 -- Company - CEO

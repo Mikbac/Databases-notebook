@@ -15,7 +15,8 @@ CREATE TABLE public.tableName
 
 -- Insert to table in schema public
 INSERT INTO public.tableName(email)
-VALUES ('osoba@adres.tld');
+VALUES
+    ('osoba@adres.tld');
 
 -- Revoke permissions
 REVOKE ALL ON SCHEMA public FROM roleName;

@@ -4,18 +4,30 @@ WHERE name LIKE '%e_';
 -- Bowser, Whistler
 
 -- ====================
-
+-- Pattern matching
+-- https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP
+-- 'abcd' ~ 'bc'     true
+-- 'abcd' ~ 'a.c'    true — dot matches any character
+-- 'abcd' ~ 'a.*d'   true — * repeats the preceding pattern item
+-- 'abcd' ~ '(b|x)'  true — | means OR, parentheses group
+-- 'abcd' ~ '^a'     true — ^ anchors to start of string
+-- 'abcd' ~ '^(b|c)' false — would match except for anchoring
 SELECT *
 FROM pet
 WHERE name ~ '^.*(g|s)$';
 -- Claws, Fang
 
 -- ====================
-
+-- SIMILAR TO operator returns true or false depending on whether its pattern matches the given string
 SELECT *
 FROM pet
 WHERE name SIMILAR TO '%(l|p)_';
 -- Chirpy, Puffball
+
+-- ====================
+-- Removes duplicate rows from a result set
+SELECT DISTINCT name
+FROM pet;
 
 -- ====================
 -- Password validity
@@ -62,10 +74,3 @@ WHERE name NOT IN ('Delhi', 'Shanghai');
 SELECT name, population / area AS population_density
 FROM cities
 WHERE population / area > 6000;
-
--- ====================
--- Join
-SELECT *
-FROM photos
-         JOIN users ON users.id = photos.user_id
-WHERE users.id = 4;

@@ -1,7 +1,6 @@
 #
 # Created by MikBac on 30.12.2024
 #
-version: "3.4"
 services:
   postgres-db:
     container_name: postgres-db
