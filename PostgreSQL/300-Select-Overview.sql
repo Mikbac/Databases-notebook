@@ -29,11 +29,38 @@ WHERE name SIMILAR TO '%(l|p)_';
 SELECT DISTINCT name
 FROM pet;
 
+SELECT DISTINCT manufacturer
+FROM phones;
+
+SELECT COUNT(DISTINCT manufacturer)
+FROM phones;
+
+SELECT COUNT(DISTINCT department)
+FROM products;
+
 -- ====================
+-- CASE
 -- Password validity
 SELECT (CASE WHEN valuntil >= NOW() THEN 't' ELSE 'f' END) AS "valid"
 FROM pg_user
 WHERE usename = 'userName';
+
+SELECT name,
+       price,
+       CASE
+           WHEN price > 200 THEN 'high'
+           WHEN price > 100 THEN 'medium'
+           ELSE 'cheap'
+           END
+FROM products;
+
+SELECT name,
+       price,
+       CASE
+           WHEN price > 200 THEN 'high'
+           WHEN price > 100 THEN 'medium'
+           END
+FROM products;
 
 -- ====================
 -- Limits for userName1 and userName2
@@ -74,3 +101,19 @@ WHERE name NOT IN ('Delhi', 'Shanghai');
 SELECT name, population / area AS population_density
 FROM cities
 WHERE population / area > 6000;
+
+-- ====================
+-- GREATEST
+SELECT GREATEST(10, 20, 30);
+-- 30
+
+SELECT name, weight, GREATEST(10, 2 * products.weight)
+FROM products;
+
+-- ====================
+-- LEAST
+SELECT LEAST(10, 20, 30);
+-- 10
+
+SELECT name, weight, LEAST(10, 2 * products.weight)
+FROM products;

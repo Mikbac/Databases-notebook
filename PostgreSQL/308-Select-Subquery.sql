@@ -34,7 +34,7 @@ SELECT name, price
 FROM products
 WHERE price > (SELECT MAX(price)
                FROM products
-               WHERE department = 'Toys')
+               WHERE department = 'Toys');
 
 SELECT id
 FROM orders
@@ -53,3 +53,47 @@ WHERE price > (SELECT price
                FROM phones
                WHERE name = 'S5620 Monte'
                  AND manufacturer = 'Samsung');
+
+SELECT DISTINCT department
+FROM products
+WHERE department NOT IN (SELECT department
+                         FROM products
+                         WHERE price < 100);
+
+SELECT name, department, price
+FROM products
+WHERE price > ALL (SELECT price
+                   FROM products
+                   WHERE department = 'Industrial');
+
+SELECT name, department, price
+FROM products
+WHERE price > SOME (SELECT price
+                    FROM products
+                    WHERE department = 'Industrial');
+
+SELECT name
+FROM phones
+WHERE price > ALL (SELECT price
+                   FROM phones
+                   WHERE manufacturer = 'Samsung');
+
+-- ====================
+-- Correlated subquery
+SELECT name, department, price
+FROM products AS p1
+WHERE p1.price = (SELECT MAX(p2.price)
+                  FROM products AS p2
+                  WHERE p2.department = p1.department);
+
+SELECT name,
+       (SELECT COUNT(*)
+        FROM orders AS o
+        WHERE p.id = o.product_id) AS order_quantity
+FROM products AS p;
+
+SELECT (SELECT MAX(price) FROM products) / (SELECT MIN(price) FROM products);
+
+SELECT (SELECT MAX(price) FROM phones) AS max_price,
+       (SELECT MIN(price) FROM phones) AS min_price,
+       (SELECT AVG(price) FROM phones) AS avg_price;
