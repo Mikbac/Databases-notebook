@@ -10,10 +10,9 @@ CREATE TABLE tableName1
 );
 
 INSERT INTO tableName1
-VALUES
-    (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
-    (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
-    (1, 'Diane', 'hamster', 'f', 2, '1999-03-30');
+VALUES (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
+       (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
+       (1, 'Diane', 'hamster', 'f', 2, '1999-03-30');
 
 DROP TABLE tableName1;
 
@@ -30,10 +29,9 @@ CREATE TABLE cities
 );
 
 INSERT INTO cities (name, country, population, area)
-VALUES
-    ('Delhi', 'India', 28125000, 2240),
-    ('Shanghai', 'China', 22125000, 4015),
-    ('Sao Paulo', 'Brazil', 20935000, 3043);
+VALUES ('Delhi', 'India', 28125000, 2240),
+       ('Shanghai', 'China', 22125000, 4015),
+       ('Sao Paulo', 'Brazil', 20935000, 3043);
 
 UPDATE cities
 SET population = 30935000
@@ -54,11 +52,10 @@ CREATE TABLE users
 );
 
 INSERT INTO users (username)
-VALUES
-    ('aaa'),
-    ('bbb'),
-    ('ccc'),
-    ('ddd');
+VALUES ('aaa'),
+       ('bbb'),
+       ('ccc'),
+       ('ddd');
 
 CREATE TABLE photos
 (
@@ -68,9 +65,8 @@ CREATE TABLE photos
 );
 
 INSERT INTO photos (url, user_id)
-VALUES
-    ('http://one.jpg', 4),
-    ('http://two.jpg', (SELECT id FROM users WHERE username = 'ccc'));
+VALUES ('http://one.jpg', 4),
+       ('http://two.jpg', (SELECT id FROM users WHERE username = 'ccc'));
 
 -- or (technically the same)
 CREATE TABLE photos
@@ -82,8 +78,7 @@ CREATE TABLE photos
 );
 
 INSERT INTO photos (url, user_id)
-VALUES
-    ('http://one.jpg', 4);
+VALUES ('http://one.jpg', 4);
 
 -- ====================
 -- Example 4
@@ -139,8 +134,51 @@ FROM photos;
 -- One-to-Many / Many-to-One
 -- A user has many photos. | Company has many employee.
 
+CREATE TABLE users
+(
+    id   INTEGER PRIMARY KEY,
+    name TEXT
+);
+
+CREATE TABLE photos
+(
+    id      INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES users (id)
+);
+
 -- One-to-One
 -- Company - CEO
 
+CREATE TABLE ceo
+(
+    id    INTEGER PRIMARY KEY,
+    name  VARCHAR(100),
+    email text
+);
+
+CREATE TABLE company
+(
+    employee_id INTEGER REFERENCES ceo (id) UNIQUE
+);
+
 -- Many-to-Many
 -- Tasks - Engineers | Movies - Actors
+
+CREATE TABLE tasks
+(
+    id   INTEGER PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE engineers
+(
+    id   INTEGER PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE tasks_engineers
+(
+    task_id     INTEGER REFERENCES tasks (id),
+    engineer_id INTEGER REFERENCES engineers (id),
+    PRIMARY KEY (task_id, engineer_id)
+);
