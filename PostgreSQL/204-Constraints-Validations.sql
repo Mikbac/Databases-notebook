@@ -1,6 +1,6 @@
 -- https://www.postgresql.org/docs/current/ddl-constraints.html
--- NOT NULL
--- DEFAULT 'Important description!'
+-- NOT NULL - value must be provided
+-- DEFAULT 'Important description!' - default value if an INSERT doesn't provide value
 -- UNIQUE
 -- CHECK ( price > 0 )
 
