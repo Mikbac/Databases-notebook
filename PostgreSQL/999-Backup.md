@@ -14,11 +14,9 @@
 
 ------------------------
 
-## pg_dump
+Restore a PostgreSQL database from an archive file created by pg_dump.
 
-https://www.postgresql.org/docs/current/app-pgdump.html
-
-### Create dump
+## Create dump
 
 ```shell
 pg_dump \
@@ -40,7 +38,7 @@ pg_dump my_important_db --encoding="UTF8" \
 * `--inserts` - Dump data as INSERT commands (rather than COPY). This will make restoration very slow; it is mainly
   useful for making dumps that can be loaded into non-PostgreSQL databases
 
-### Load dump
+## Load dump
 
 ```shell
 psql -d databaseName -f fileName.sql
@@ -48,4 +46,25 @@ psql -d databaseName -f fileName.sql
 
 ```shell
 gzip backup_1.gz | psql --username=AdminUser2 new_important_db -v VERBOSE=1
+```
+
+------------------------
+
+Restore a PostgreSQL database from an archive file created by pg_dump.
+
+## pg_dump
+
+
+
+## pg_restore
+
+
+```shell
+# if inside the container change the user ("su - postgres") before
+pg_restore \
+  --data-only \
+  --no-owner \
+  --single-transaction \
+  --disable-triggers \
+  -d postgres /tmp/data.sql
 ```
