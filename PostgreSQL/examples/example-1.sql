@@ -39,6 +39,7 @@ CREATE TABLE reactions
     movie_id   INTEGER REFERENCES movies (id) ON DELETE CASCADE,
     comment_id INTEGER REFERENCES comments (id) ON DELETE CASCADE,
     type       reaction_type NOT NULL,
+    -- checks if it is a reaction to a video or a commentary on a movie
     CHECK (
         COALESCE((movie_id)::BOOLEAN::INTEGER, 0)
             +
