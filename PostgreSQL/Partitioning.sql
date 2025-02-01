@@ -1,3 +1,7 @@
+-- ---------------------
+-- Hash partitioning
+-- ---------------------
+
 -- Add partition hash
 CREATE TABLE tableName
 (
@@ -13,6 +17,10 @@ CREATE TABLE test_remainder0_Name
 CREATE TABLE test_remainder1_Name
     PARTITION OF tableName
         FOR VALUES WITH (MODULUS 2, REMAINDER 1);
+
+-- ---------------------
+-- Range partitioning
+-- ---------------------
 
 -- Add partition range
 CREATE TABLE orders
@@ -39,6 +47,10 @@ CREATE TABLE orders_new
 CREATE TABLE orders_invalid
     PARTITION OF orders
         DEFAULT;
+
+-- ---------------------
+-- List partitioning
+-- ---------------------
 
 -- Add partition list
 CREATE TABLE clients
