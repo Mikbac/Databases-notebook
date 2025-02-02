@@ -1,3 +1,11 @@
+-- https://www.postgresql.org/docs/current/query-path.html
+-- Select stages:
+-- * Connection
+-- * Parser
+-- * Rewrite
+-- * Planner/Optimizer
+-- * Executor
+--
 -- https://www.postgresql.org/docs/current/sql-explain.html
 -- EXPLAIN - show the execution plan of a statement
 -- EXPLAIN ANALYZE -  causes the statement to be actually executed, not only planned
@@ -47,3 +55,24 @@ WHERE username = 'Viviane70';
 SELECT *
 FROM pg_stats
 WHERE tablename = 'users';
+
+-- ------------------------
+-- Query Planning
+-- https://www.postgresql.org/docs/current/runtime-config-query.html
+-- COST = (# pages read sequentially) * seq_page_cost
+--        + (# pages read at random) * random_page_cost
+--        + (# rows scanned) * cpu_tuple_cost
+--        + (# index entries scanned) * cpu_index_tuple_cost
+--        + (# times function/operator evaluated) * cpu_operator_cost
+--
+-- seq_page_cost = 1.0
+-- random_page_cost = 4.0
+-- cpu_tuple_cost = 0.01
+-- cpu_index_tuple_cost = 0.005
+-- cpu_operator_cost = 0.0025
+-- e.g.
+-- 5 pages of an index (random)
+-- 20 tuples from the index
+-- 10 pages from a heap file (random)
+-- 200 tuples
+-- = 5 * 4.0 + 20 * 0.005 + 10 * 4.0 + 200 * 0.01 = 62.1

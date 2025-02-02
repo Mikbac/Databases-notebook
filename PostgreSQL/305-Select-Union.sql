@@ -35,3 +35,15 @@ UNION ALL
  FROM products
  ORDER BY price / weight DESC
  LIMIT 5);
+
+-- example
+SELECT u.username, COUNT(u.username)
+FROM users AS u
+         JOIN
+     (SELECT user_id, created_at
+      FROM photo_tags
+      UNION ALL
+      SELECT user_id, created_at
+      FROM comment_tags) AS t ON u.id = t.user_id
+WHERE t.created_at > '2015-01-01'
+GROUP BY u.username;
