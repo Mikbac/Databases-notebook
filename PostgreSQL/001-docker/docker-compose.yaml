@@ -12,6 +12,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres1
       - POSTGRES_DB=test_db
+    restart: always
     deploy:
       resources:
         limits:
