@@ -1,3 +1,11 @@
+-- Table Partitioning
+-- Partitioning refers to splitting what is logically one large table into smaller physical pieces.
+-- Benefits:
+-- * Query performance can be improved dramatically in certain situations
+-- * When queries or updates access a large percentage of a single partition, performance can be improved by using a sequential scan
+-- * Bulk loads and deletes can be accomplished by adding or removing partitions
+-- https://www.postgresql.org/docs/current/ddl-partitioning.html
+
 -- ---------------------
 -- Hash partitioning
 -- ---------------------
@@ -7,7 +15,6 @@ CREATE TABLE tableName
 (
     id INTEGER
 ) PARTITION BY HASH (id);
--- LIST/RANGE/HASH
 
 -- Create partitions for hash
 CREATE TABLE test_remainder0_Name

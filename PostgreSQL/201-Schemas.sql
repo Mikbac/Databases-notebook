@@ -10,6 +10,13 @@ ALTER SCHEMA schemaName RENAME TO roleName;
 -- Changing schema owner
 ALTER SCHEMA schemaName OWNER TO roleName;
 
+-- Search path
+-- https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PATH
+SHOW search_path;
+
+-- Changing default chema
+SET search_path TO testUser, public;
+
 -- Creating table in schema public
 CREATE TABLE public.tableName
 (
@@ -41,8 +48,3 @@ DROP SCHEMA schemaName;
 -- Schemas in DB
 \dn
 \dn+
-
--- Search path
--- https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PATH
---
-SHOW search_path;

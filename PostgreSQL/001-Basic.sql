@@ -10,3 +10,7 @@ SELECT current_database();
 
 -- Table properties
 \d tableName1
+
+-- Copy to a CSV
+
+\copy (select * from users) to 'users.csv' CSV HEADER
