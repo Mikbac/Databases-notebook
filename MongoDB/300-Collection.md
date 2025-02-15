@@ -1,0 +1,5 @@
+# Collection
+
+```shell
+show collections;
+```
