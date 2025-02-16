@@ -1,8 +1,14 @@
 # Find
 
 ```javascript
+db.collection.find(query, projection)
+```
+
+```javascript
 db.users.find()
 ```
+
+-----------------------------------------------------------------------
 
 ## Comparators
 
@@ -48,6 +54,8 @@ db.accounts.find({
 })
 ```
 
+-----------------------------------------------------------------------
+
 ## Array query
 
 ```javascript
@@ -76,6 +84,8 @@ db.transactions.find({
     }
 })
 ```
+
+-----------------------------------------------------------------------
 
 ## Logical operators
 
@@ -139,4 +149,36 @@ db.accounts.find({
         {products: {$in: ["Brokerage"]}}
     ]
 })
+```
+
+-----------------------------------------------------------------------
+
+## projection
+
+include -> 1
+exclude -> 0
+
+inclusion and exclusion can't be combined in projections, except _id field
+
+```javascript
+db.companies.find({category_code: 'music'}, {name: 1, _id: 0})
+```
+
+```javascript
+db.sales.find({storeLocation: 'Denver'}, {saleDate: 1, storeLocation: 1, purchaseMethod: 1})
+```
+
+```javascript
+db.sales.find({"customer.age": {$lt: 30}, "customer.satisfaction": {$gt: 3}}, {
+    "customer.age": 1,
+    "customer.satisfaction": 1,
+    _id: 0
+})
+```
+
+```javascript
+db.sales.find(
+    {storeLocation: {$in: ['Seattle', 'New York']}},
+    {purchaseMethod: 0, customer: 0, couponUsed: 0}
+)
 ```

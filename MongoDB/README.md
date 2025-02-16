@@ -8,8 +8,8 @@ General purpose document database.
 
 BSON is the binary representation of JSON that supports data types unavailable in JSON.
 
-The maximum BSON document size is 16 mebibytes. To store documents larger than the maximum size, MongoDB provides the GridFS API.
-
+The maximum BSON document size is 16 mebibytes. To store documents larger than the maximum size, MongoDB provides the
+GridFS API.
 
 ## Links
 

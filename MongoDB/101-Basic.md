@@ -11,20 +11,24 @@ mongodb://myDatabaseUser:D1fficultP%40ssw0rd@router1.example.com:27017,router2.e
 
 * mongodb:// or mongodb+srv:// - standard connection format (mongodb://) or SRV connection format (mongodb+srv://
 * username:password@ - authentication credentials
-* host[:port] - the host (and optional port number) where the mongod instance (or mongos instance for a sharded cluster) is running
+* host[:port] - the host (and optional port number) where the mongod instance (or mongos instance for a sharded cluster)
+  is running
 * /defaultauthdb - authentication database to use if the connection string includes authentication credentials
-* ?<options> -  connection specific options
+* ?<options> - connection specific options
 
 If the port number is not specified, the default port 27017 is used.
 
 Sample options:
-* w -  requests acknowledgment that the write operation has propagated to a specified number of mongod instances or to mongod instances with specified tags (specify a number, the string majority, or a tag set)
+
+* w - requests acknowledgment that the write operation has propagated to a specified number of mongod instances or to
+  mongod instances with specified tags (specify a number, the string majority, or a tag set)
 * replicaSet - specifies the name of the replica set
 * tls - boolean - enables or disables TLS/SSL for the connection
-* ssl - boolean -  enable or disable TLS/SSL for the connection
+* ssl - boolean - enable or disable TLS/SSL for the connection
 * tlsCAFile - location of a local .pem file that contains the root certificate chain from the Certificate Authority
 * connectTimeoutMS - the time in milliseconds to attempt a connection before timing out
-* compressors - comma-delimited string of compressors to enable network compression for communication between this client and a mongod / mongos instance
+* compressors - comma-delimited string of compressors to enable network compression for communication between this
+  client and a mongod / mongos instance
 * zlibCompressionLevel - an integer that specifies the compression level if using zlib for network compression
 * maxPoolSize - maximum number of connections in the connection pool
 * retryWrites - enable retryable writes.
