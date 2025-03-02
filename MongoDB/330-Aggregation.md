@@ -87,6 +87,37 @@ db.users.aggregate([
 ])
 ```
 
+$search aggregation stage allows us to give weight to different field and also filter our results without having to create additional aggregation stages.
+
+* "must" will exclude records that do not meet the criteria
+* "mustNot" will exclude results that do meet the criteria
+* "should" will allow you to give weight to results that do meet the criteria so that they appear first
+* "filter" will remove results that do not meet the criteria.
+
+```javascript
+db.users.aggregate([
+    {
+        $search: {
+            "compound": {
+                "must": [{
+                    "text": {
+                        "query": "field",
+                        "path": "habitat"
+                    }
+                }],
+                "should": [{
+                    "range": {
+                        "gte": 45,
+                        "path": "wingspan_cm",
+                        "score": {"constant": {"value": 5}}
+                    }
+                }]
+            }
+        }
+    }
+])
+```
+
 -----------------------------------------------------------------------
 
 ## $group
