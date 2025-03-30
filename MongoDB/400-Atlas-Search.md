@@ -534,3 +534,12 @@ db.sales.aggregate([
   }
 ]
 ```
+
+## Example - 10
+
+```javascript
+db.products.find(
+    { $text: { $search: 'orange' } }, 
+    { score: { $meta: 'textScore' } },
+).sort( { score: { $meta: 'textScore' } } )
+```
