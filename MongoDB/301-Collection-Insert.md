@@ -84,3 +84,36 @@ db.accounts.insertMany([{
         "last_updated": new Date()
     }])
 ```
+
+## bulkWrite
+
+```javascript
+db.accounts.bulkWrite([
+    {
+        insertOne: {
+            "document":
+                {
+                    "account_id": 333321,
+                    "limit": 12000,
+                    "products": [
+                        "Commodity",
+                        "Brokerage"
+                    ],
+                    "last_updated": new Date()
+                }
+
+        }
+    }, {
+        updateOne:
+            {
+                "filter": {account_id: 333321},
+                "update": {
+                    $set: {
+                        "limit": 3
+                    }
+                },
+
+            }
+    }
+])
+```
