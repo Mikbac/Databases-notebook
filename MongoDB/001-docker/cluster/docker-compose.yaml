@@ -1,0 +1,83 @@
+#
+# Created by MikBac on 05.04.2025
+#
+services:
+  mongo-db-1:
+    container_name: mongo-db-1
+    image: mongo:8.0.6
+    hostname: mongo-db-1
+    ports:
+      - '27017:27017'
+    command:
+      - "--replSet"
+      - "myTestReplSet"
+      - "--bind_ip"
+      - "localhost,mongo-db-1"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1g
+    volumes:
+      - mongo-1-data:/data/db
+      - mongo-1-config:/data/configdb
+    networks:
+      - mongo-cluster-network
+
+  mongo-db-2:
+    container_name: mongo-db-2
+    image: mongo:8.0.6
+    hostname: mongo-db-2
+    ports:
+      - '27018:27017'
+    command:
+      - "--replSet"
+      - "myTestReplSet"
+      - "--bind_ip"
+      - "localhost,mongo-db-2"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1g
+    volumes:
+      - mongo-2-data:/data/db
+      - mongo-2-config:/data/configdb
+    networks:
+      - mongo-cluster-network
+
+  mongo-db-3:
+    container_name: mongo-db-3
+    image: mongo:8.0.6
+    hostname: mongo-db-3
+    ports:
+      - '27019:27017'
+    command:
+      - "--replSet"
+      - "myTestReplSet"
+      - "--bind_ip"
+      - "localhost,mongo-db-3"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1g
+    volumes:
+      - mongo-3-data:/data/db
+      - mongo-3-config:/data/configdb
+    networks:
+      - mongo-cluster-network
+
+volumes:
+  mongo-1-data:
+  mongo-1-config:
+  mongo-2-data:
+  mongo-2-config:
+  mongo-3-data:
+  mongo-3-config:
+
+networks:
+  mongo-cluster-network:

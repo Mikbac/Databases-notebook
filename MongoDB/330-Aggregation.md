@@ -87,7 +87,8 @@ db.users.aggregate([
 ])
 ```
 
-$search aggregation stage allows us to give weight to different field and also filter our results without having to create additional aggregation stages.
+$search aggregation stage allows us to give weight to different field and also filter our results without having to
+create additional aggregation stages.
 
 * "must" will exclude records that do not meet the criteria
 * "mustNot" will exclude results that do meet the criteria
@@ -354,6 +355,67 @@ db.getSiblingDB("sample_analytics").customers.aggregate([
     },
     {
         $out: {db: 'test', coll: 'results'}
+    }
+])
+```
+
+-----------------------------------------------------------------------
+
+## $lookup - To perform an equality match between a field from the input documents with a field from the documents of the "joined" collection
+
+```javascript
+db.collection.aggregate([
+    {
+        $lookup:
+            {
+                from: "<collection to join>",
+                localField: "<field from the input documents>",
+                foreignField: " <field from the documents of the "from" collection>",
+                as: "<output array field>"
+            }
+    }
+])
+```
+
+e.g.
+
+```javascript
+db.comments.aggregate([
+    {
+        $lookup: {
+            from: "movies",
+            localField: "movie_id",
+            foreignField: "_id",
+            as: "movie_details",
+        },
+    }
+])
+```
+
+or
+
+```javascript
+db.movies.aggregate([
+    {
+        $lookup: {
+            from: "comments",
+            localField: "_id",
+            foreignField: "movie_id",
+            as: "movie_comments"
+        }
+    },
+    {
+        $match: {
+            movie_comments: {
+                $exists: true, $ne: []
+            }
+        }
+    },
+    {
+        $project: {
+            title: 1,
+            "movie_comments.text": 1
+        }
     }
 ])
 ```

@@ -106,11 +106,40 @@ db.birds.updateOne(
 )
 ```
 
+The $addToSet operator in MongoDB is used to add a value to an array and if the value already exists in the array then
+this operator will do nothing.
+
+```javascript
+db.movies.find({_id: ObjectId("573a1391f29313caabcd6d40")},
+    {
+        languages: 1
+    }
+)
+// 573a1391f29313caabcd6d40,"[""English""]"
+
+db.movies.updateOne(
+    {_id: ObjectId("573a1391f29313caabcd6d40")},
+    {$addToSet: {languages: "Polish"}}
+)
+
+db.movies.find({_id: ObjectId("573a1391f29313caabcd6d40")},
+    {
+        languages: 1
+    }
+)
+// 573a1391f29313caabcd6d40,"[""English"", ""Polish""]"
+```
+
 -----------------------------------------------------------------------
 
 ## findAndModify
 
 Updates and returns a single document (findOne() + updateOne()).
+
+* Returns the document (original or updated).
+* Modifies only one document.
+* Can be used for atomic operations (e.g., counters).
+* Can also remove the document instead of updating (remove: true).
 
 https://www.mongodb.com/docs/manual/reference/method/db.collection.findAndModify/
 
@@ -122,7 +151,7 @@ db.users.findAndModify({
 )
 ```
 
-new - returns the updated document rather than the origina
+new - returns the updated document rather than the original
 
 ```javascript
 db.users.findAndModify({
