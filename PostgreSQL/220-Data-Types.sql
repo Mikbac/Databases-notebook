@@ -88,3 +88,31 @@ SELECT j1 -> 'foo',         -- [       true,       "bar"    ]
        j2 -> 'tags' ? 'a',  -- true
        j2 -> 'tags' ? 'd'   -- false
 FROM tableName1;
+
+-- -----------------------------------
+-- hstore - hstore key/value datatype
+
+-- hstore data type for storing sets of key/value pairs within a single PostgreSQL value
+
+-- run extension
+CREATE EXTENSION hstore;
+
+-- create table
+CREATE TABLE books
+(
+    id         serial primary key,
+    title      VARCHAR(255),
+    attributes hstore
+);
+
+-- insert
+INSERT INTO books (title, attributes)
+VALUES
+    ('PostgreSQL Tutorial',
+     '"publisher" => "postgresqltutorial.com",
+     "language"  => "English"');
+
+-- select
+SELECT attributes -> 'publisher'
+FROM books
+WHERE attributes -> 'language' = 'English';
