@@ -21,7 +21,12 @@ If the port number is not specified, the default port 27017 is used.
 Sample options:
 
 * w - requests acknowledgment that the write operation has propagated to a specified number of mongod instances or to
-  mongod instances with specified tags (specify a number, the string majority, or a tag set)
+  mongod instances with specified tags (specify a number, the string majority, or a tag set) (corresponds to the **write
+  concern**)
+* readConcernLevel - allows clients to choose a level of isolation for their reads from replica sets (corresponds to the
+  **read concern**)
+* readPreference - read preference describes how MongoDB clients route read operations to the members of a replica set (
+  `primary`,`primaryPreferred`,`secondary`,`secondaryPreferred`,`nearest`)
 * replicaSet - specifies the name of the replica set
 * tls - boolean - enables or disables TLS/SSL for the connection
 * ssl - boolean - enable or disable TLS/SSL for the connection

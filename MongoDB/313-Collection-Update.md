@@ -106,6 +106,18 @@ db.birds.updateOne(
 )
 ```
 
+The $mul operator multiplies the value of a field by a number.
+
+```javascript
+db.birds.updateOne(
+    {common_name: "Robin Redbreast"},
+    {
+        $mul: {sightings: 2},
+    },
+    {upsert: true}
+)
+```
+
 The $addToSet operator in MongoDB is used to add a value to an array and if the value already exists in the array then
 this operator will do nothing.
 

@@ -1,4 +1,4 @@
--- Indexes
+-- Standard indexes
 -- https://www.postgresql.org/docs/current/indexes.html
 -- Indexes are a common way to enhance database performance.
 -- An index allows the database server to find and retrieve specific rows much faster than it could do
