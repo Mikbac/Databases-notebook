@@ -5,7 +5,16 @@ db.collection.find(query, projection)
 ```
 
 ```javascript
+// Find all:
 db.users.find()
+```
+
+```javascript
+db.users.findOne(query)
+```
+
+```javascript
+db.users.findOne()
 ```
 
 -----------------------------------------------------------------------
@@ -14,16 +23,17 @@ db.users.find()
 
 https://www.mongodb.com/docs/manual/reference/operator/query-comparison/
 
-| Name | Description                                                         |
-|------|---------------------------------------------------------------------|
-| $eq  | Matches values that are equal to a specified value.                 |
-| $gt  | Matches values that are greater than a specified value.             |
-| $gte | Matches values that are greater than or equal to a specified value. |
-| $in  | Matches any of the values specified in an array.                    |
-| $lt  | Matches values that are less than a specified value.                |
-| $lte | Matches values that are less than or equal to a specified value.    |
-| $ne  | Matches all values that are not equal to a specified value.         |
-| $nin | Matches none of the values specified in an array.                   |
+| Name | Description                                                                   |
+|------|-------------------------------------------------------------------------------|
+| $eq  | Matches values that are equal to a specified value.                           |
+| $gt  | Matches values that are greater than a specified value.                       |
+| $gte | Matches values that are greater than or equal to a specified value.           |
+| $in  | Matches any of the values specified in an array.                              |
+| $in  | Matches any of the values specified in an array.                              |
+| $all | Selects the documents where the value of a field matches all specified values |
+| $lte | Matches values that are less than or equal to a specified value.              |
+| $ne  | Matches all values that are not equal to a specified value.                   |
+| $nin | Matches none of the values specified in an array.                             |
 
 ```javascript
 db.users.find({username: {$eq: "Bob"}})
