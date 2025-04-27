@@ -7,6 +7,7 @@ mongodb+srv://username:password@host[:port]/defaultauthdb?<options>
 e.g.
 mongodb+srv://myDatabaseUser:D1fficultP%40ssw0rd@cluster0.example.mongodb.net/?retryWrites=true&w=majority&authSource=admin
 mongodb://myDatabaseUser:D1fficultP%40ssw0rd@router1.example.com:27017,router2.example2.com:27017,router3.example3.com:27017/
+mongodb://node1:27017,node2:27017,node3:27017/?replicaSet=myReplicaSet&retryWrites=true&w=majority&maxPoolSize=100&tls=true
 ```
 
 * mongodb:// or mongodb+srv:// - standard connection format (mongodb://) or SRV connection format (mongodb+srv://

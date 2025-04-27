@@ -129,7 +129,7 @@ SELECT *
 FROM photos;
 
 -- ====================
--- Example 4
+-- Example 5
 
 -- One-to-Many / Many-to-One
 -- A user has many photos. | Company has many employee.
@@ -182,3 +182,21 @@ CREATE TABLE tasks_engineers
     engineer_id INTEGER REFERENCES engineers (id),
     PRIMARY KEY (task_id, engineer_id)
 );
+
+-- ====================
+-- Example 6
+
+-- The optional ON CONFLICT clause specifies an alternative action to raising a unique violation or
+-- exclusion constraint violation error.
+
+CREATE TABLE users
+(
+    id      INTEGER PRIMARY KEY,
+    name   TEXT
+);
+
+INSERT INTO users (id, name)
+VALUES
+    (1, 'Alice'),
+    (1, 'Bob')
+ON CONFLICT (id) DO NOTHING;
