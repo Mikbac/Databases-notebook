@@ -12,6 +12,10 @@ db.users.deleteOne({_id: ObjectId('67b101e4ff05fa8dfacab63a')})
 db.birds.deleteOne({_id: ObjectId("62cddf53c1d62bc45439bebf")})
 ```
 
+```javascript
+db.birds.findOneAndDelete({_id: ObjectId("62cddf53c1d62bc45439bebf")})
+```
+
 ## deleteMany
 
 If we provide an empty filter, MongoDB matches all documents in the collection and deletes them.

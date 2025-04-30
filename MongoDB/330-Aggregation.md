@@ -162,6 +162,17 @@ db.sightings.aggregate([
 ])
 ```
 
+```javascript
+db.employees.aggregate([
+   {
+      $group: {
+         _id: "$department",
+         average_salary: { $avg: "$salary" }
+      }
+   }
+])
+```
+
 -----------------------------------------------------------------------
 
 ## $sort
@@ -309,6 +320,21 @@ db.sightings.aggregate([
         }
     }, {
         $count: 'bluebird_sightings_2022'
+    }
+])
+```
+
+-----------------------------------------------------------------------
+
+## $bucketAuto - categorizes incoming documents into a specific number of groups, called buckets, based on a specified expression.
+
+```javascript
+db.branches.aggregate([
+    {
+        $bucketAuto: {
+            groupBy: "$annualRevenue",
+            buckets: 10
+        }
     }
 ])
 ```
