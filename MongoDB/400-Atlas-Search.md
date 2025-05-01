@@ -75,7 +75,7 @@ db.customers.aggregate([
 ])
 ```
 
-## Example - 1 - Dynamic indexing
+## Example — 1 - Dynamic indexing
 
 ```json
 {
@@ -103,7 +103,7 @@ query:
 ]
 ```
 
-## Example - 2 - Static indexing
+## Example — 2 Static indexing
 
 You can use the Atlas Search autocomplete type to index text values in string fields for autocompletion.
 
@@ -138,7 +138,7 @@ db.restaurants.aggregate([
 ])
 ```
 
-## Example - 3
+## Example — 3
 
 ```javascript
 db.sales.aggregate([
@@ -174,7 +174,7 @@ db.sales.aggregate([
   the searchScore of a search query. The score is based on how much that record matches the search term and on the rules
   described in the index. In this case, with a dynamic index, all of the fields were treated equally.
 
-## Example - 4 - Static indexing
+## Example — 4 Static indexing
 
 ```json
 {
@@ -206,7 +206,7 @@ db.restaurants.aggregate([
 ])
 ```
 
-## Example - 5 - Static indexing
+## Example — 5 Static indexing
 
 ```json
 {
@@ -244,7 +244,7 @@ db.sales.aggregate([
 ])
 ```
 
-## Example - 6
+## Example — 6
 
 $search aggregation stage allows us to give weight to different field and also filter our results without having to
 create additional aggregation stages.
@@ -279,7 +279,7 @@ db.birds.aggregate([
 ])
 ```
 
-## Example - 7
+## Example — 7
 
 ```javascript
 db.sales.aggregate([
@@ -317,7 +317,7 @@ db.sales.aggregate([
 ])
 ```
 
-## Example - 8 - Facets
+## Example — 8 Facets
 
 index:
 
@@ -405,7 +405,7 @@ response:
 ]
 ```
 
-## Example - 9 - Facets
+## Example — 9 - Facets
 
 ```javascript
 db.birds.aggregate([
@@ -436,7 +436,7 @@ db.birds.aggregate([
 ])
 ```
 
-## Example - 9 
+## Example — 9 
 
 ```json
 {
@@ -535,11 +535,45 @@ db.sales.aggregate([
 ]
 ```
 
-## Example - 10
+## Example — 10
 
 ```javascript
 db.products.find(
     { $text: { $search: 'orange' } }, 
     { score: { $meta: 'textScore' } },
 ).sort( { score: { $meta: 'textScore' } } )
+```
+
+## Example — 11
+
+```json
+{
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "name": [
+        {
+          "type": "autocomplete",
+          "tokenization": "edgeGram"
+        }
+      ]
+    }
+  }
+}
+```
+
+
+```javascript
+db.products.aggregate(
+    [
+        {"$search": 
+                  {"text": 
+                            {
+                                "path": "name", 
+                              "query": "apples"
+                            }
+                  }
+        }
+    ]
+)
 ```
