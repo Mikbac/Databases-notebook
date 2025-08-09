@@ -23,9 +23,8 @@ CREATE TABLE accounts
 );
 
 INSERT INTO accounts(account_name, balance)
-VALUES
-    ('aaa', 100.00),
-    ('bbb', 100.00);
+VALUES ('aaa', 100.00),
+       ('bbb', 100.00);
 
 BEGIN;
 
@@ -44,4 +43,3 @@ WHERE account_name = 'bbb';
 -- WHERE account_name = 'aaa';
 
 COMMIT;
-

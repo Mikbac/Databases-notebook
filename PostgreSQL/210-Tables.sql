@@ -9,6 +9,9 @@ CREATE TABLE tableName1
     "naME5" DATE
 );
 
+COMMENT ON COLUMN tableName1.name1 IS 'comment name1';
+COMMENT ON COLUMN tableName1.name2 IS 'comment name2';
+
 INSERT INTO tableName1
 VALUES (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
        (1, 'Diane', 'hamster', 'f', 2, '1999-03-30'),
@@ -191,12 +194,11 @@ CREATE TABLE tasks_engineers
 
 CREATE TABLE users
 (
-    id      INTEGER PRIMARY KEY,
-    name   TEXT
+    id   INTEGER PRIMARY KEY,
+    name TEXT
 );
 
 INSERT INTO users (id, name)
-VALUES
-    (1, 'Alice'),
-    (1, 'Bob')
+VALUES (1, 'Alice'),
+       (1, 'Bob')
 ON CONFLICT (id) DO NOTHING;
