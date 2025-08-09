@@ -4,6 +4,17 @@
 SELECT COALESCE(NULL, 3, NULL, 6, NULL);
 -- 3
 
+SELECT jsonb_build_object(
+               'id', 123,
+               'name', 'Alice',
+               'active', true
+       ) AS user_info;
+-- {
+--   "id": 123,
+--   "name": "Alice",
+--   "active": true
+-- }
+
 -- ---------------------------------------------
 -- Example 2
 
