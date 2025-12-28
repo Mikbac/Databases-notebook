@@ -1,0 +1,57 @@
+#
+# Created by MikBac on 17.12.2025
+#
+services:
+  postgres-publisher:
+    image: postgres:17.2
+    container_name: pg-publisher
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres1
+      - POSTGRES_DB=test_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-publisher-data:/var/lib/postgresql/data
+      - ./publisher-init/pg_hba.conf:/etc/postgresql/pg_hba.conf
+      - ./publisher-init/01-create-publication.sql:/docker-entrypoint-initdb.d/01-create-publication.sql
+      - ./publisher-init/02-create-users.sql:/docker-entrypoint-initdb.d/02-create-users.sql
+    command:
+      - postgres
+      - -c
+      - wal_level=logical
+      - -c
+      - listen_addresses=*
+      - -c
+      - hba_file=/etc/postgresql/pg_hba.conf
+    networks:
+      - pg-cluster-sr-network
+
+  postgres-subscriber:
+    image: postgres:17.2
+    container_name: pg-subscriber
+    depends_on:
+      - postgres-publisher
+    environment:
+      - POSTGRES_USER=subscriber
+      - POSTGRES_PASSWORD=subscriber1
+      - PGPASSWORD=replicator1
+    entrypoint: >
+      bash -c "
+        sleep 10
+        exec docker-entrypoint.sh postgres
+      "
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg-subscriber-data:/var/lib/postgresql/data
+      - ./subscriber-init/01-create-subscription.sql:/docker-entrypoint-initdb.d/01-create-subscription.sql
+    networks:
+      - pg-cluster-sr-network
+
+volumes:
+  pg-publisher-data:
+  pg-subscriber-data:
+
+networks:
+  pg-cluster-sr-network:

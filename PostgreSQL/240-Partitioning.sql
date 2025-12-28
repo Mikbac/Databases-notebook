@@ -25,6 +25,8 @@ CREATE TABLE test_remainder1_Name
     PARTITION OF tableName
         FOR VALUES WITH (MODULUS 2, REMAINDER 1);
 
+SELECT TABLEOID::regclass AS partitioned_table, * FROM tableName;
+
 -- ---------------------
 -- Range partitioning
 -- ---------------------
@@ -88,3 +90,7 @@ CREATE TABLE clients_south_hash
 
 -- Remove partition
 DROP TABLE partitionName;
+
+-- ---------------------
+-- Composite partitioning
+-- ---------------------

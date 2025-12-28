@@ -1,0 +1,2 @@
+CREATE ROLE subscriber REPLICATION LOGIN ENCRYPTED PASSWORD 'subscriber1';
+GRANT SELECT ON TABLE public.users TO subscriber;

@@ -1,0 +1,49 @@
+#
+# Created by MikBac on 31.12.2025
+#
+services:
+  pgbouncer:
+    image: edoburu/pgbouncer:v1.25.1-p0
+    container_name: pgbouncer
+    depends_on:
+      - postgres-db
+    environment:
+        - DB_USER=postgres_user
+        - DB_PASSWORD=postgres1
+        - DB_HOST=postgres-db
+        - DB_NAME=test_db
+        - AUTH_TYPE=scram-sha-256
+        - MAX_CLIENT_CONN=100
+    ports:
+      - "6432:5432"
+    networks:
+      - pg-test-network
+
+  postgres-db:
+    container_name: postgres-db
+    image: postgres:17.2
+    hostname: postgres-db
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres_user
+      - POSTGRES_PASSWORD=postgres1
+      - POSTGRES_DB=test_db
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1g
+    volumes:
+      - db-test-storage:/var/lib/postgresql/data
+    networks:
+      - pg-test-network
+
+volumes:
+  db-test-storage:
+    name: db-test-storage
+    driver: local
+
+networks:
+  pg-test-network:
